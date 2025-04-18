@@ -1,2 +1,1 @@
-# KPI-Tu-n-1
-nội dung kpi hoàn thành trong tuần 1
+Phạm Văn Đức hoàn thành KPI tuần 1 của anh Lê Bá Châu đề ra
