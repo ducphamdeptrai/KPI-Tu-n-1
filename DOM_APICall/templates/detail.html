@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ pokemon.name.capitalize() }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .pokemon-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .pokemon-detail img {
+            max-width: 200px;
+            margin-right: 20px;
+        }
+        .info {
+            flex: 1;
+        }
+        .info p {
+            font-size: 1.1rem;
+            color: #555;
+        }
+        .evolutions {
+            margin-top: 30px;
+            text-align: center;
+        }
+    
+        .evolutions h3 {
+            font-size: 1.5em;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+    
+        .evolution-chain {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+    
+        .evolution-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+    
+        .evolution-item:hover {
+            transform: scale(1.1);
+        }
+    
+        .evolution-link {
+            text-decoration: none;
+            color: #333;
+        }
+    
+        .evolution-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+    
+        .evolution-img:hover {
+            transform: scale(1.2);
+        }
+    
+        .evolution-name {
+            margin-top: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-transform: capitalize;
+            color: #333;
+        }
+        .back-link {
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .back-link:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h2>🔎 Thông tin Pokémon: {{ pokemon.name.capitalize() }}</h2>
+    
+    <div class="pokemon-detail">
+        <img src="{{ pokemon.sprites['front_default'] }}" alt="{{ pokemon.name }}">
+        <div class="info">
+            <p><strong>Chiều cao:</strong> {{ pokemon.height / 10 }} m</p>
+            <p><strong>Cân nặng:</strong> {{ pokemon.weight / 10 }} kg</p>
+            <p><strong>Số thứ tự:</strong> {{ pokemon.id }}</p>
+        </div>
+    </div>
+
+    {% if evolutions %}
+    <div class="evolutions">
+        <h3>Tiến hóa:</h3>
+        <div class="evolution-chain">
+            {% for evo in evolutions %}
+                <div class="evolution-item">
+                    <a href="{{ url_for('pokemon_detail', name=evo['name']) }}" class="evolution-link">
+                        <img src="{{ evo['sprite'] }}" alt="{{ evo['name'] }} Evolution" class="evolution-img">
+                        <p class="evolution-name">{{ evo['name'].capitalize() }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
+    
+    <a href="/" class="back-link">⬅ Quay lại danh sách</a>
+</body>
+</html>
